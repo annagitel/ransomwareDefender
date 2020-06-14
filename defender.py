@@ -13,7 +13,7 @@ def lock_test(filepath):
     return True
 
 
-def extantion_test(filename):
+def extention_test(filename):
     print("testing if filename is valid")
     arr = filename.split('.')
     if len(arr) != 2:
@@ -34,32 +34,20 @@ def ascii_test(filepath):
     lst = f.readlines()
     for line in lst:
         if not line.isascii():
-            print("it was not a ascii-encoded unicode string")
+            print("it was not a ascii-encoded unicode string !!! FILE IS ENCRYPTED !!!!")
             return False
     print("ascii test passed")
 
 
-def caesar_test():
-    print("testing caesar encryption")
-    return True
-
-
-def frequency_test():
-    print("testing frequency encryption")
-    return True
-
-
-def last_modified_test():
-    print("testing last modification")
-    return True
-
-
 if __name__ == '__main__':
+    dir_str = input("please enter the directory you want to check or press ENTER to check in the current directory: ")
+    if dir_str == "":
+        directory = os.getcwd()
+        dir_str = str(directory)
+    else:
+        directory = os.fsencode(dir_str)
 
-    # dir_str = input("please enter the directory you want to check: ")
-    dir_str = "/home/asandler/PycharmProjects/ransomwareDefender/files"
-    directory = os.fsencode(dir_str)
-
+    print(f"going over : {str(directory)}")
     for file in os.listdir(directory):
         filename = os.fsdecode(file)
         print("-------------------------")
@@ -67,13 +55,6 @@ if __name__ == '__main__':
         print("-------------------------")
         lock_test(dir_str + '/' + filename)
         print("\n")
-        extantion_test(filename)
+        extention_test(filename)
         print("\n")
         ascii_test(dir_str + '/' + filename)
-        print("\n")
-        caesar_test()
-        print("\n")
-        frequency_test()
-        print("\n")
-        last_modified_test()
-        print("\n")
