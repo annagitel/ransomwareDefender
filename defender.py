@@ -34,7 +34,7 @@ def ascii_test(filepath):
     lst = f.readlines()
     for line in lst:
         if not line.isascii():
-            print("it was not a ascii-encoded unicode string !!! FILE IS ENCRYPTED !!!!")
+            print("it was not a ascii-encoded unicode string ")
             return False
     print("ascii test passed")
 
@@ -50,11 +50,16 @@ if __name__ == '__main__':
     print(f"going over : {str(directory)}")
     for file in os.listdir(directory):
         filename = os.fsdecode(file)
-        print("-------------------------")
-        print(filename)
-        print("-------------------------")
-        lock_test(dir_str + '/' + filename)
-        print("\n")
-        extention_test(filename)
-        print("\n")
-        ascii_test(dir_str + '/' + filename)
+        if filename != 'defender.py':
+            ans = True
+            print("-------------------------")
+            print(filename)
+            print("-------------------------")
+            ans = lock_test(dir_str + '/' + filename)
+            print("\n")
+            ans = extention_test(filename)
+            print("\n")
+            ans = ascii_test(dir_str + '/' + filename)
+
+            if not ans:
+                print(f"!!! {filename} FILE IS ENCRYPTED !!!!")
